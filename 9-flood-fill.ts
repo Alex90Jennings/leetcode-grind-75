@@ -18,5 +18,3 @@ function paintPixel(image: number[][], r: number, c: number, pixelColour, newCol
     paintPixel(image, r, c + 1, pixelColour, newColour, visitedPixels)
     paintPixel(image, r, c - 1, pixelColour, newColour, visitedPixels)
 }
-
-console.log(floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2))
