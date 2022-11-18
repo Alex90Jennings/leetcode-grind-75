@@ -1,40 +1,30 @@
-class TreeNodeY {
-    val: number
-    left: TreeNodeY | null
-    right: TreeNodeY | null
-    constructor(val?: number, left?: TreeNodeY | null, right?: TreeNodeY | null) {
-        this.val = (val===undefined ? 0 : val)
-        this.left = (left===undefined ? null : left)
-        this.right = (right===undefined ? null : right)
-    }
-}
+import { TreeNode } from "./classes"
 
 
-function isBalanced(root: TreeNodeY | null): boolean {
+function isBalanced(root: TreeNode | null): boolean {
     let heightRight: number = 0
     let heightLeft: number = 0
 
-    let nodeRight: TreeNodeY = root[2]
-    let nodeLeft: TreeNodeY = root[1]
+    let node: TreeNode = root[0]
 
-    function rightSide(node){
+    function rightSide(node: TreeNode){
         if(node.right){
             heightRight++
-            nodeRight = node.right
-            rightSide(nodeRight)
+            let nextNode: TreeNode = node.right
+            rightSide(nextNode)
         } else return
     }
 
-    function leftSide(node){
+    function leftSide(node: TreeNode){
         if(node.left){
             heightLeft++
-            nodeLeft = node.left
-            leftSide(nodeLeft)
+            let nextNode: TreeNode = node.left
+            leftSide(nextNode)
         } else return
     }
 
-    rightSide(nodeRight)
-    leftSide(nodeLeft)
+    rightSide(node)
+    leftSide(node)
 
     if(heightLeft - 1 === heightRight || heightLeft + 1 === heightRight || heightLeft === heightRight) return true
     return false

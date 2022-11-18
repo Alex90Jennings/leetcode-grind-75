@@ -1,15 +1,6 @@
- class TreeNodeX {TreeNodeX
-         val: number
-         left: TreeNodeX | null
-         right: TreeNodeX | null
-         constructor(val?: number, left?: TreeNodeX | null, right?: TreeNodeX | null) {
-             this.val = (val===undefined ? 0 : val)
-             this.left = (left===undefined ? null : left)
-             this.right = (right===undefined ? null : right)
-         }
-     }
+import { TreeNode } from "./classes";
 
-function invertTree(root: TreeNodeX | null): TreeNodeX | null {
+function invertTree(root: TreeNode | null): TreeNode | null {
     if (!root) return null;
     [root.left, root.right] = [root.right, root.left];
     invertTree(root.left);
