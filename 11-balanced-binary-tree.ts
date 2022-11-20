@@ -2,30 +2,15 @@ import { TreeNode } from "./classes"
 
 
 function isBalanced(root: TreeNode | null): boolean {
-    let heightRight: number = 0
-    let heightLeft: number = 0
-
-    let node: TreeNode = root[0]
-
-    function rightSide(node: TreeNode){
-        if(node.right){
-            heightRight++
-            let nextNode: TreeNode = node.right
-            rightSide(nextNode)
-        } else return
+    function dfs(root: TreeNode | null): [boolean, number] {
+      if (!root) return [true, 0]
+  
+      const left = dfs(root.left);
+      const right = dfs(root.right);
+      const balanced: boolean = (left[0] && right[0] && Math.abs(left[1] - right[1]) <= 1)
+  
+      return [balanced, 1 + Math.max(left[1], right[1])]
     }
-
-    function leftSide(node: TreeNode){
-        if(node.left){
-            heightLeft++
-            let nextNode: TreeNode = node.left
-            leftSide(nextNode)
-        } else return
-    }
-
-    rightSide(node)
-    leftSide(node)
-
-    if(heightLeft - 1 === heightRight || heightLeft + 1 === heightRight || heightLeft === heightRight) return true
-    return false
-};
+  
+    return dfs(root)[0]
+  };
